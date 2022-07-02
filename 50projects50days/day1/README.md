@@ -2,6 +2,8 @@
 
 [demo](Expanding%20Cards.html ':include')
 
+>   点击卡片时，对应卡片会展开
+
 # 实现方式
 
 通过flex布局，通过点击时改变`class`的方式实现变化样式的效果

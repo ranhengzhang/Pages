@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress Steps</title>
+    <script>
+        window.onload = function () {
+            let n = 1;
+            function change(fun) {
+                n = fun(n);
+                n = n < 1 ? 1 : n > 4 ? 4 : n;
+                document.getElementById('bar').style.width = 100 / 3 * (n - 1) + '%';
+                for (let i = 0; i < 4; ++i) {
+                    if (i < n) {
+                        document.getElementsByClassName('number')[i].classList.add('shine');
+                    } else {
+                        document.getElementsByClassName('number')[i].classList.remove('shine');
+                    }
+                }
+            }
+            document.getElementById('prev').onclick = ()=>{change((num)=>{return --num})};
+            document.getElementById('next').onclick = ()=>{change((num)=>{return ++num})};
+        }
+    </script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: "Tahoma L", "Microsoft YaHei UI Light", serif;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #box {
+            text-align: center;
+        }
+        #line {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            width: 350px;
+            margin-bottom: 35px;
+        }
+        #line::before {
+            content: ' ';
+            position: absolute;
+            display: inline-block;
+            width: 100%;
+            height: 0;
+            border-top: #e0e0e0 4px solid;
+            z-index: -2;
+            left: 0;
+            bottom: calc(50% - 2px);
+        }
+        .number {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            color: #777;
+            background-color: #fff;
+            font-size: 20px;
+            line-height: 25px;
+            border-radius: 50%;
+            border: #e0e0e0 4px solid;
+            transition: border-top-color .5s, border-right-color .5s, border-bottom-color .5s, border-left-color .5s;
+        }
+        .shine {
+            border: #3498db 4px solid;
+        }
+        #bar {
+            position: absolute;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            height: 0;
+            width: 0;
+            left: 0;
+            bottom: calc(50% - 2px);
+            transition: width .5s ease-out;
+            z-index: -1;
+        }
+        button {
+            width: 85px;
+            height: 35px;
+            color: #fff;
+            font-size: 15px;
+            line-height: 35px;
+            background-color: #3498db;
+            border: none;
+            border-radius: 10px;
+            margin: 5px;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="line">
+        <div class="shine" id="bar"></div>
+        <div class="number shine">1</div>
+        <div class="number">2</div>
+        <div class="number">3</div>
+        <div class="number">4</div>
+    </div>
+    <button id="prev">Prev</button>
+    <button id="next">Next</button>
+</div>
+</body>
+</html>

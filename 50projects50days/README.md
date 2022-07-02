@@ -5,3 +5,5 @@
 | 标号 |                   题目                    |                             链接                             |
 | :--: | :---------------------------------------: | :----------------------------------------------------------: |
 |  1   | [Expanding Cards](50projects50days/day1/) | [Demo](50projects50days/day1/Expanding%20Cards.html ':ignore') |
+|  2   | [Progress Steps](50projects50days/day2/)  | [Demo](50projects50days/day2/Progress Steps.html ':ignore')  |
+
