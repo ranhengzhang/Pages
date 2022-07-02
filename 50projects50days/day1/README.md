@@ -16,9 +16,29 @@
 
 ### **Flex布局**
 
+```css
+#box {
+    display: flex;
+}
+
+.retract {
+    flex-grow: .5;
+}
+
+.expand {
+    flex-grow: 5;
+}
+```
+
 [Flex 布局教程：语法篇 - 阮一峰的网络日志](http://ruanyifeng.com/blog/2015/07/flex-grammar.html)
 
 ### **css transition**
+
+```css
+.retract {
+    transition: flex .5s ease-in;
+}
+```
 
 [使用 CSS transitions - CSS（层叠样式表） | MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions)
 
