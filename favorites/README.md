@@ -1,6 +1,6 @@
 # 文件收藏夹
 
-#### 笔记
+## 笔记
 
 > docsify
 
@@ -19,3 +19,9 @@ https://docsify.js.org/#/
 [docsify，做一个自己的文档\_高先生的猫的博客-CSDN博客\_docsify主题](https://blog.csdn.net/z591102/article/details/108326239)
 
 <!-- tabs:end -->
+
+## git
+
+[Git忽略文件.gitignore的使用 - 简书](https://www.jianshu.com/p/a09a9b40ad20)
+
+[Git忽略文件.gitignore规则详解\_梅坞茶坊的博客-CSDN博客\_gitignore规则](https://blog.csdn.net/qq_32421489/article/details/121910707)

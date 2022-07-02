@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expanding Cards</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+        $(function () {
+            $('.retract').css('border-radius', ($('#box').width() - 100) / 14 / 2)
+
+            let w = Math.ceil($('#box').width() - 100 / 7 * 5),
+                h = Math.ceil($('#box').height() - 20);
+            let nodes = document.querySelectorAll('.retract');
+
+            for (let i = 0; i < nodes.length; ++i) {
+                let item = $(nodes[i])
+                item.css('background-image', item.css('background-image').replace(/(?<=w=)[0-9]+/, w).replace(/(?<=h=)[0-9]+/, h))
+            }
+
+            nodes.forEach(item=>{
+                item.addEventListener('click', ()=>{
+                    removeActiveClass();
+                    item.classList.add('expand');
+                });
+            });
+
+            function removeActiveClass() {
+                document.querySelectorAll('.expand').forEach(item=>{
+                    item.classList.remove('expand');
+                });
+            }
+        });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #box {
+            display: flex;
+            width: 90vw;
+            height: 80vh;
+        }
+
+        .retract {
+            flex-grow: .5;
+            margin: 10px;
+            border-radius: 50px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            transition: flex .5s ease-in;
+        }
+
+        .expand {
+            flex-grow: 5;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div class="retract expand" style="background-image:url(https://images.unsplash.com/photo-1656682775761-1a5d84b09767?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&h=980&q=80);"></div>
+    <div class="retract" style="background-image:url(https://images.unsplash.com/photo-1656675844970-b001101f6043?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&h=980&q=80);"></div>
+    <div class="retract" style="background-image:url(https://images.unsplash.com/photo-1656688553442-a142af8ed4b3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&h=980&q=80);"></div>
+    <div class="retract" style="background-image:url(https://images.unsplash.com/photo-1656376406179-1fbd9a8f4362?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&h=980&q=80);"></div>
+    <div class="retract" style="background-image:url(https://images.unsplash.com/photo-1656576897856-8231e183d2cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&h=980&q=80);"></div>
+</div>
+</body>
+</html>
