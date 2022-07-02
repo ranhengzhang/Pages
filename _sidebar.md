@@ -1,4 +1,5 @@
 -   [50 projects 50 days](50projects50days/)
     -   [目录](50projects50days/README.md)
     -   [day1](50projects50days/day1/)
+    -   [day2](50projects50days/day2/)
 -   [收藏夹](favorites/)
