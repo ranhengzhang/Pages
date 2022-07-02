@@ -6,15 +6,16 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <script>
         $(function () {
-            $('.retract').css('border-radius', ($('#box').width() - 100) / 14 / 2)
+            $('#box').width(Math.floor(($('#box').width() - 100) / 14) * 14 + 100);
+            $('.retract').css('border-radius', ($('#box').width() - 100) / 14 / 2);
 
             let w = Math.ceil($('#box').width() - 100 / 7 * 5),
                 h = Math.ceil($('#box').height() - 20);
             let nodes = document.querySelectorAll('.retract');
 
             for (let i = 0; i < nodes.length; ++i) {
-                let item = $(nodes[i])
-                item.css('background-image', item.css('background-image').replace(/(?<=w=)[0-9]+/, w).replace(/(?<=h=)[0-9]+/, h))
+                let item = $(nodes[i]);
+                item.css('background-image', item.css('background-image').replace(/(?<=w=)[0-9]+/, w).replace(/(?<=h=)[0-9]+/, h));
             }
 
             nodes.forEach(item=>{
