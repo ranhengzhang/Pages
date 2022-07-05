@@ -1,10 +1,12 @@
-# 目标效果
+# Expanding Cards
+
+## 目标效果
 
 [demo](Expanding%20Cards.html ':include')
 
 >   点击卡片时，对应卡片会展开
 
-# 实现方式
+## 实现方式
 
 使用flex布局，改变`flex`样式变化大小
 
@@ -14,7 +16,7 @@
 
 通过结点的`classList`属性的`add`和`remove`方法更改属性
 
-# 知识点
+## 知识点
 
 <!-- tabs:start -->
 
