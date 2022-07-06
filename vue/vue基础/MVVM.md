@@ -8,4 +8,4 @@
 
 >   图源：[vue-mvvm设计模式](https://echizen.github.io/tech/2019/03-24-vue-mvvm)
 
->   推荐阅读：[vue中MVVM实现原理 - 知乎](https://zhuanlan.zhihu.com/p/107610658)
+>   拓展阅读：[vue中MVVM实现原理 - 知乎](https://zhuanlan.zhihu.com/p/107610658)
