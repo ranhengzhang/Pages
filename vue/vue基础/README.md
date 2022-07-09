@@ -196,3 +196,143 @@ new Vue({
 >   1.   计算属性被修改时（当`vm`中的缓存被修改时）
 >
 >   >   如果在`setter`中修改了依赖的值，由于触发了依赖值的`setter`，计算属性的`getter`又会被调用一次
+
+## 监视属性
+
+监视属性写在`watch`中：
+
+```javascript
+new Vue({
+    el: '#root',
+    watch: {
+        name: {
+            handler(newValue, oldValue){
+                ;
+            },
+            immediate: false,
+            deep: false
+        }
+    }
+})
+```
+
+其中：
+
+>   -   `handler`会在属性被修改时调用
+
+在Vue对象外也可以配置监听：
+
+```typescript
+vm.$watch(name: string, {
+    handler(newValue, oldValue){
+        ;
+    }
+})
+```
+
+如果只有一个`handler`，可以使用简写：
+
+```javascript
+new Vue({
+    el: '#root',
+    watch: {
+        name(newValue, oldValue){
+            ;
+        }
+    }
+})
+```
+
+```typescript
+vm.$watch(name: string, function(){
+    ;
+})
+```
+
+## 特殊案例
+
+>   绑定`class`样式——对象写法
+
+[demo01](demo01/index.html ':include')
+
+[demo01](demo01/index.html ':include :type=code')
+
+>   绑定style——对象写法
+
+[demo02](demo02/index.html ':include')
+
+[demo02](demo02/index.html ':include :type=code')
+
+## 条件渲染
+
+当多个结点使用同一条件时，可以使用`template`标签包住：
+
+```html
+<template v-if="...">
+    <div>
+        111
+    </div>
+    <div>
+        222
+    </div>
+    <div>
+        333
+    </div>
+</template>
+```
+
+在最终渲染之后，`template`标签将会被去除，不会影响整体结构
+
+>   `template`只能使用`v-if`，不能使用`v-show`，因为`template`标签本身就不会被渲染到文档中
+
+## 列表渲染
+
+>   使用`v-for`时，每个标签应当绑定一个属性`key`作为子结点的唯一标识：
+>
+>   ```html
+>   <ul>
+>       <li v-for="item in list" :key="item.id"></li>
+>   </ul>
+>   ```
+>
+>   
+
+>   `v-for`的循环一般会接收一个参数为结点内容，但是如果接收两个参数：`v-for="(item, index) in list"`，则会接收到节点内容和索引值
+>
+>   一般这种形式只在遍历对象时使用：`v-for="(value, key) in obj"`，可以方便地列出对象中的属性
+
+## Vue监听原理
+
+### 简易vm
+
+```javascript
+// 源数据
+let data = {
+    a : 'a',
+    b : 'b'
+};
+
+// 准备一个实例对象，用于检测data中发生的变化
+const obs = new Observer(data);
+
+// 准备一个vm实例对象
+let vm = {};
+vm._data = data = obs;
+
+function Observer(obj){
+    // 汇总对象中的属性形成一个数组
+    const keys = Object.keys(obj);
+
+    keys.forEach(key => {
+        Object.defineProperties(this, key, {
+            get(){
+                return obj[key];
+            },
+            set(val){
+                obj[key] = val;
+            }
+        });
+    });
+};
+```
+

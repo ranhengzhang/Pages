@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>绑定class样式——对象写法</title>
+    <title>绑定style——对象写法</title>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.7.0/vue.js"></script>
     <script>
@@ -10,48 +10,46 @@
             new Vue({
                 el: '#root',
                 data: {
-                    cls: {
-                        red: false,
-                        dashed: false
+                    sty: {
+                        fontSize: '20px'
                     }
                 }
             })
-        });
+        })
     </script>
     <style>
         * {
             font-family: "Tahoma L", "Microsoft YaHei UI Light", serif;
         }
-        body,
-        html {
+        html,
+        body {
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .base {
-            width: 200px;
-            height: 200px;
-            border: 2px black solid;
+        #root {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            border: 1px black solid;
+        }
+        #root div {
+            height: 60px;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 20px;
-            line-height: 20px;
-        }
-        .red {
-            border-color: red;
-        }
-        .dashed {
-            border-style: dashed;
+            align-items: center;
         }
     </style>
 </head>
 <body>
-<div class="base" :class="cls" id="root">
-    <button @click="cls.red = !cls.red">红色边框</button>
-    <button @click="cls.dashed = !cls.dashed">虚线边框</button>
+<div id="root">
+    字体大小<br>
+    <button @click="sty.fontSize = parseInt(sty.fontSize) - 1 + 'px'">-</button>
+    {{ sty.fontSize }}
+    <button @click="sty.fontSize = parseInt(sty.fontSize) + 1 + 'px'">+</button>
+    <div :style="sty">&lt;?&gt;</div>
 </div>
 </body>
 </html>
