@@ -47,6 +47,35 @@ new Vue({
 
 >   [面试官：为什么data属性是一个函数而不是一个对象？ | web前端面试 - 面试官系列](https://vue3js.cn/interview/vue/data.html)
 
+#### 添加属性
+
+如果希望给==`data`中的<u>某个对象</u>==添加一个新的属性，可以使用`set`方法：
+
+```javascript
+const vm = new Vue({
+    el: '#root',
+    data: {
+        base: {
+            a: 985
+        }
+    },
+    methods: {
+        addBC(){
+            Vue.set(this.base, 'b', 211);
+            vm.$set(this.base, 'c', 210)
+        }
+    }
+});
+
+Vue.set(vm._data.base, 'd', 934);
+vm.$set(vm.base, 'e', 327)
+```
+
+>   推荐阅读：
+>
+>   -   [API — Vue.js](https://cn.vuejs.org/v2/api/#Vue-set)
+>   -   [API — Vue.js](https://cn.vuejs.org/v2/api/#vm-set)
+
 ## 数据代理
 
 ```typescript
@@ -180,7 +209,6 @@ new Vue({
 >   })
 >   ```
 >
->   
 
 >   计算属性的原理是，当有关`data`的值改变时，该值的`setter`会被触发，在这时会对有关计算属性进行一次更新
 >
@@ -249,6 +277,12 @@ vm.$watch(name: string, function(){
 })
 ```
 
+### 原理
+
+Vue所管理的对象对应的方法被调用时，会触发一次刷新，这些方法是被Vue包装过的，如果不通过这些包装过的方法而修改属性（如==**通过索引修改数组内容**==）
+
+>   推荐阅读：[列表渲染 — Vue.js](https://cn.vuejs.org/v2/guide/list.html#%E6%95%B0%E7%BB%84%E6%9B%B4%E6%96%B0%E6%A3%80%E6%B5%8B)
+
 ## 特殊案例
 
 >   绑定`class`样式——对象写法
@@ -303,6 +337,10 @@ vm.$watch(name: string, function(){
 
 ## Vue监听原理
 
+Vue通过数据劫持进行监听
+
+>   推荐阅读：[数据劫持（数据代理） - 简书](https://www.jianshu.com/p/87a1ff1d7a3c)
+
 ### 简易vm
 
 ```javascript
@@ -336,3 +374,62 @@ function Observer(obj){
 };
 ```
 
+## 表单绑定
+
+>   官网演示：[表单输入绑定 — Vue.js](https://cn.vuejs.org/v2/guide/forms.html)
+
+### 表单项修饰符
+
+>   修饰符`lazy`可以限制Vue在表单项失去焦点之后再收集信息：
+
+```html
+<form>
+    <input v-model.lazy=""/>
+</form>
+```
+
+>   修饰符`trim`可以去除前后空格
+
+## 过滤器
+
+过滤器写在`filters`中：
+
+```html
+<div id="root" :xx="dataName | filterName">{{dataName | filterName}}</div>
+
+<script>
+    new Vue({
+        el: '#root',
+        data: {
+            dataName: ...
+        }
+        filters: {
+            filterName(value){
+                ...
+                return ...
+            }
+        }
+    })
+</script>
+```
+
+-   过滤器是支持**链式调用**的，即：可以将前一次的过滤结果作为下一次过滤的输入
+-   过滤器的调用也可以加括号，而且过滤器的传参会自动将目标`value`作为第一个参数，不管调用时是否写了
+-   不可以再`model`中
+
+### 注册全局过滤器
+
+```typescript
+Vue.filter(name: string, function(value){
+    ...
+    return ...
+});
+
+new Vue({
+    ...
+})
+```
+
+>   必须在`new`一个Vue实例之前创建全局过滤器
+
+>   推荐阅读：[过滤器 — Vue.js](https://cn.vuejs.org/v2/guide/filters.html)
