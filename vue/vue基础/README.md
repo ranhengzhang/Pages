@@ -433,3 +433,112 @@ new Vue({
 >   必须在`new`一个Vue实例之前创建全局过滤器
 
 >   推荐阅读：[过滤器 — Vue.js](https://cn.vuejs.org/v2/guide/filters.html)
+
+## Vue命令
+
+### v-text和v-html
+
+该命令会替换标签中**所有**的内容，区别在于一个是`innerText`，一个是`innerHTML`
+
+>   推荐阅读：[模板语法 — Vue.js](https://cn.vuejs.org/v2/guide/syntax.html#%E6%8F%92%E5%80%BC)
+
+### v-cloak
+
+在从MDN获取到Vue.js之前，Vue模板会直接显示在页面上，如果希望在获取Vue之前都不显示这些内容，可以使用`v-cloak`搭配css实现：
+
+```html
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+<div id="root" v-cloak></div>
+<script>
+    new Vue({
+        ...
+    })
+</script>
+```
+
+>   Vue加载完成后，会自动删除`v-cloak`标签，原先的`display: none;`的样式没有了，内容也就显示出来了，而且不会将差值语法显示在页面上
+
+### v-once
+
+该命令限制其中的内容渲染一次
+
+### v-pre
+
+该命令会使结点在编译时跳过，其内容自然不会被渲染
+
+>   使用此命令可以加快编译
+
+### 自定义指令
+
+自定义指令写在`directives`中：
+
+```html
+<div id="root" v-name...></div>
+<script>
+    new Vue({
+        el: '#root',
+        data: {
+            ...
+        },
+        directives: {
+            name: {
+                bind(element, binding){
+                    ...
+                },
+                inserted(element, binding){
+                    ...
+                },
+                update(element, binding){
+                    ...
+                },
+                method1(){
+                    ...
+                },
+                method2(){
+                    ...
+                },
+                ...
+            }
+        }
+    });
+</script>
+```
+
+也可以简写（实际上简写就是将函数同时绑定给`bind`和`update`）：
+
+```typescript
+directives: {
+    name(element: HTMLElement, binding){ // (element instanceof HTMLElement) => true; binding 是指元素和指令之间的关系
+        // 对**dom**的具体操作
+        ...
+    }
+}
+```
+
+>   在声明自定义命令时不需要加上`v-`，但在调用时必须加上`v-`
+>
+>   `bind`被调用时，结点==还未被绑定到dom中==
+>
+>   此处所有的`this`都是`window`
+>
+>   命名时**禁止**使用驼峰命名（因为大写字母会被转为小写），简写时的标准写法法如下：
+>
+>   ```html
+>   <div id="root" v-name1-name2...></div>
+>   <script>
+>       'name1-name2':function(element, binding){
+>           ...
+>       }
+>   </script>
+>   ```
+
+>   自定义的指令会在以下两个时机调用：
+>
+>   1.   指令与元素绑定时
+>   2.   指令所在的模板被重新解析时
+
+>   推荐阅读：[自定义指令 — Vue.js](https://cn.vuejs.org/v2/guide/custom-directive.html)
