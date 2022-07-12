@@ -542,3 +542,15 @@ directives: {
 >   2.   指令所在的模板被重新解析时
 
 >   推荐阅读：[自定义指令 — Vue.js](https://cn.vuejs.org/v2/guide/custom-directive.html)
+
+## 生命周期
+
+![Vue 实例生命周期](img/README/20220712232005598.png)
+
+>   图源：[Vue 实例 — Vue.js](https://cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA)
+
+其中各步骤所完成的任务如下图：
+
+![生命周期](img/README/20220713001240989.png)
+
+>   图源：[尚硅谷Vue2.0+Vue3.0全套教程丨vuejs从入门到精通\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1Zy4y1K7SH?p=49&share_source=copy_web)

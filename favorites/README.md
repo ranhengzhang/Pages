@@ -29,3 +29,7 @@ https://docsify.js.org/#/
 ## JS
 
 [Javascript 增强for循环 - 掘金](https://juejin.cn/post/6888585177258262542)
+
+[JS-箭头函数中的this的指向\_zhq2005095的博客-CSDN博客\_js中箭头函数的this指向](https://blog.csdn.net/zhq2005095/article/details/70666833)
+
+[debugger - JavaScript | MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/debugger)
