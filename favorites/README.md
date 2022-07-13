@@ -33,3 +33,7 @@ https://docsify.js.org/#/
 [JS-箭头函数中的this的指向\_zhq2005095的博客-CSDN博客\_js中箭头函数的this指向](https://blog.csdn.net/zhq2005095/article/details/70666833)
 
 [debugger - JavaScript | MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/debugger)
+
+## 其它
+
+[Linux和Windows共享文件夹：/mnt目录下没有/hgfs的解决办法\_树下等苹果的博客-CSDN博客\_linux共享文件夹hgfs没东西](https://blog.csdn.net/qq_43516928/article/details/119430588)
