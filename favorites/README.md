@@ -26,6 +26,8 @@ https://docsify.js.org/#/
 
 [Git忽略文件.gitignore规则详解\_梅坞茶坊的博客-CSDN博客\_gitignore规则](https://blog.csdn.net/qq_32421489/article/details/121910707)
 
+[Git工作流和核心原理 | GitHub基本操作 | VS Code里使用Git和关联GitHub\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1r3411F7kn?spm_id_from=333.851.b_7265636f6d6d656e64.4&vd_source=c951410929d2de9f09fc1e638a82d5e1)
+
 ## JS
 
 [Javascript 增强for循环 - 掘金](https://juejin.cn/post/6888585177258262542)
@@ -37,3 +39,7 @@ https://docsify.js.org/#/
 ## 其它
 
 [Linux和Windows共享文件夹：/mnt目录下没有/hgfs的解决办法\_树下等苹果的博客-CSDN博客\_linux共享文件夹hgfs没东西](https://blog.csdn.net/qq_43516928/article/details/119430588)
+
+[layui/layui: 一套遵循原生态开发模式的 Web UI 组件库，采用自身轻量级模块化规范，易上手，可以更简单快速地构建网页界面。](https://github.com/layui/layui)
+
+[在虚拟机上搭建自己的 git 服务器并创建 git 仓库\_Looooking的博客-CSDN博客\_虚拟机搭建git服务器](https://blog.csdn.net/TomorrowAndTuture/article/details/108611882)

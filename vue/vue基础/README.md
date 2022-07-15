@@ -43,9 +43,9 @@ new Vue({
 
 原因如下：
 
-[面试官：为什么data属性是一个函数而不是一个对象？ | web前端面试 - 面试官系列](https://vue3js.cn/interview/vue/data.html ':include height=700px')
+[面试官：为什么data属性是一个函数而不是一个对象？ · Issue #9 · febobo/web-interview](https://github.com/febobo/web-interview/issues/9 ':include :type=iframe')
 
->   [面试官：为什么data属性是一个函数而不是一个对象？ | web前端面试 - 面试官系列](https://vue3js.cn/interview/vue/data.html)
+>   [面试官：为什么data属性是一个函数而不是一个对象？ · Issue #9 · febobo/web-interview](https://github.com/febobo/web-interview/issues/9)
 
 #### 添加属性
 

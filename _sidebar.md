@@ -7,4 +7,4 @@
     -   [MVVM](vue/vue%E5%9F%BA%E7%A1%80/MVVM.md)
     -   [vue组件](vue/vue%E7%BB%84%E4%BB%B6/README.md)
     -   [vue脚手架](vue/vue%E8%84%9A%E6%89%8B%E6%9E%B6/README.md)
--   [收藏夹](favorites/)
+-   [★收藏夹★](favorites/)
