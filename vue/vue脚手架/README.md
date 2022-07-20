@@ -13,6 +13,7 @@ demo
 ├── babel.config.js
 ├── jsconfig.json
 ├── node_modules
+│   └── ...
 ├── package.json
 ├── package-lock.json
 ├── public
@@ -189,3 +190,113 @@ export default {
 >   字段重复时，接收的值的优先级要大于定义的值
 >
 >   `props`中的东西是被优先接收的，所以可以在`data`和`methods`中使用`props`中的内容，因为`data`中的数据在`props`之后配置
+
+### mixin
+
+所有的公共的配置项都可以写在混合中，之后只需要引入即可使用混合的内容
+
+>   混合的内容如果有重复项，则使用配置的值，丢弃混合的值
+>
+>   但是生命周期的钩子**不以任何一方为主，==两者都会被调用==**
+
+#### 局部混合
+
+```javascript
+// mixin.js
+
+export const mixin = {
+    data() {
+        return ...
+    }
+    methods: {
+        methodName(): {
+            ...
+        }
+    },
+    mounted() {
+        ...
+    }
+}
+```
+
+```vue
+<!-- App.vue -->
+
+<template>
+  <div @click="methodName">
+  </div>
+</template>
+
+<script>
+import {mixin, ...} from '.../mixin'
+export default {
+  name: 'App',
+  mixins: [mixin]
+}
+</script>
+```
+
+#### 全局混合
+
+```javascript
+// mixin.js
+
+export const mixin1 = {
+    ...
+}
+
+export const mixin2 = {
+    ...
+}
+```
+
+```javascript
+// main.js
+
+import {mixin1, mixin2} from './mixin'
+
+Vue.mixin(mixin1)
+Vue.mixin(mixin2)
+```
+
+## 插件
+
+```javascript
+// plugins.js
+export default {
+    install(Vue) {
+        Vue.mixin({
+            data() {
+                return {
+                    name: 'plugin name'
+                }
+            }
+        })
+        ...
+    }
+}
+```
+
+```javascript
+import plugins from './plugins'
+
+Vue.use(plugins)
+```
+
+插件用于对Vue进行增强
+
+>   `install`的第一个参数`Vue`是Vue的构造器
+>
+>   调用时传入的参数都将依次放在`Vue`之后
+
+---
+
+>   在编写样式时，切记所有的样式最终会汇总在一起，所以可能会引发样式冲突，而后引入的样式会覆盖之前引入的样式
+>
+>   如果希望避免冲突，可以在`style`标签中加上`scoped`（`<style scoped></style>`），这样每个组件的样式只在每个组件中生效
+>
+>   原理是每个组件的标签中都会有一个随机生成的序列号（`data-v-xxxxxxxx`），然后使用标签的属性选择器即可控制指定组件中的内容
+>
+>   **`App`组件一般只添加全局样式**
+>
+>   `style`标签中还可以使用`lang`来指定编写样式的语言（css、less等）
