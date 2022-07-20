@@ -300,4 +300,3 @@ Vue.use(plugins)
 >   **`App`组件一般只添加全局样式**
 >
 >   `style`标签中还可以使用`lang`来指定编写样式的语言（css、less等）
-
