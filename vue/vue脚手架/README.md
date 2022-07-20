@@ -189,3 +189,5 @@ export default {
 >   字段重复时，接收的值的优先级要大于定义的值
 >
 >   `props`中的东西是被优先接收的，所以可以在`data`和`methods`中使用`props`中的内容，因为`data`中的数据在`props`之后配置
+
+试试git
