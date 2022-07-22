@@ -1,6 +1,8 @@
 <template>
   <ul class="todo-main">
-    <MyItem v-for="todo in todos" :key="todo.id" :todo="todo"/>
+    <MyItem v-for="todo in todos"
+            :key="todo.id"
+            :todo="todo"/>
   </ul>
 </template>
 
@@ -10,27 +12,7 @@ import MyItem from "@/components/MyItem";
 export default {
   name: "MyList",
   components: {MyItem},
-  data() {
-    return {
-      todos: [
-        {
-          id: '001',
-          title: "吃饭",
-          done: true
-        },
-        {
-          id: '002',
-          title: "睡觉",
-          done: false
-        },
-        {
-          id: '003',
-          title: "循环",
-          done: true
-        }
-      ]
-    }
-  }
+  props: ['todos']
 }
 </script>
 

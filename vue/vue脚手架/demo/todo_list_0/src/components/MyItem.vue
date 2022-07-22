@@ -1,17 +1,29 @@
 <template>
   <li>
     <label>
-      <input type="checkbox" :checked="todo.done"/>
+      <input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)"/>
       <span>{{todo.title}}</span>
     </label>
-    <button class="btn btn-danger" style="display:none">删除</button>
+    <button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
   </li>
 </template>
 
 <script>
 export default {
   name: "MyItem",
-  props: ['todo']
+  methods: {
+    // 勾选或取消
+    handleCheck(id) {
+      // 通知App组件将对应todo对象的done值取反
+      this.checkTodo(id);
+    },
+    handleDelete(id) {
+      if (confirm('确定删除吗？')) {
+        this.deleteTodo(id)
+      }
+    }
+  },
+  props: ['todo', 'checkTodo', 'deleteTodo']
 }
 </script>
 
@@ -49,5 +61,13 @@ li:before {
 
 li:last-child {
   border-bottom: none;
+}
+
+li:hover {
+  background-color: gray;
+}
+
+li:hover button {
+  display: inline-block;
 }
 </style>

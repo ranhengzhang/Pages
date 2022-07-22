@@ -2,8 +2,8 @@
   <div id="root">
     <div class="todo-container">
       <div class="todo-wrap">
-        <MyHeader/>
-        <MyList/>
+        <MyHeader :addTodo="addTodo"/>
+        <MyList :todos="todos"/>
         <MyFooter/>
       </div>
     </div>
@@ -17,7 +17,34 @@ import MyFooter from "@/components/MyFooter";
 
 export default {
   name: 'App',
-  components: {MyHeader, MyList, MyFooter}
+  components: {MyHeader, MyList, MyFooter},
+  data() {
+    return {
+      todos: [
+        {
+          id: '001',
+          title: "吃饭",
+          done: true
+        },
+        {
+          id: '002',
+          title: "睡觉",
+          done: false
+        },
+        {
+          id: '003',
+          title: "循环",
+          done: true
+        }
+      ]
+    }
+  },
+  methods: {
+    // 添加一个todo
+    addTodo(todo) {
+      this.todos.unshift(todo)
+    }
+  }
 }
 </script>
 
