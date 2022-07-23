@@ -26,12 +26,13 @@ export default {
         done: false
       };
       // 通知App组件添加一个todo对象
-      this.addTodo(todo_obj);
+      // this.addTodo(todo_obj);
+        this.$emit('addTodo', todo_obj)
       // 清空输入
       this.title = '';
     }
   },
-  props: ['addTodo']
+  // props: ['addTodo']
 }
 </script>
 
