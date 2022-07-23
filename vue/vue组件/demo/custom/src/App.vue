@@ -5,10 +5,11 @@
     <School :getSchoolName="getSchoolName"/>
 
 <!--  通过父组件给子组件绑定一个自定义事件（第一种写法，使用@或v-on）  -->
-    <Student v-on.once="getStudentName"/>
+    <Student v-on:macabaca.once="getStudentName"
+             @demo="m1"/>
 
 <!--  通过父组件给子组件绑定一个自定义事件（第二种写法，使用ref）  -->
-    <Student ref="student"/>
+<!--    <Student ref="student"/>-->
   </div>
 </template>
 
@@ -30,6 +31,9 @@ export default {
     },
     getStudentName(name) {
       console.log('App收到了学生名', name);
+    },
+    m1() {
+      console.log('demo被调用');
     }
   },
   mounted() {
