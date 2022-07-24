@@ -321,3 +321,22 @@ Vue.use(plugins)
 >   如果想绑定真正的原生事件，需要以`@click.native`的形式绑定
 
 如果使用`this.$refs.xxx.$on('eventName': string, methodName: function)`时，回调函数要么配置在`methods`中，要么用<u>**箭头函数**</u>，否则`this`的指向会有问题
+
+## 全局事件总线
+
+>   任意组件间通信
+
+```javascript
+// main.js
+new Vue ({
+  ...
+  mounted() {
+    Vue.prototype.$bus = this; // 安装全局事件总线
+  }
+  ...
+})
+```
+
+>   最好在`beforeDestory`钩子中，用`$off`解绑**<u>当前组件</u>**所用到的事件
+
+## 消息订阅与发布
