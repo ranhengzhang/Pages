@@ -6,6 +6,7 @@
                    @change="handleCheck(todo.id)"/>
             <span v-show="!todo.isEdit">{{ todo.title }}</span>
             <input v-show="todo.isEdit"
+                   ref="inputTitle"
                    :value="todo.title"
                    type="text"
                    @blur="handleBlur(todo, $event)">
@@ -14,7 +15,8 @@
                 @click="handleDelete(todo.id)">删除
         </button>
         <button class="btn btn-edit"
-                @click="handleEdit(todo)" v-show="!todo.isEdit">编辑
+                @click="handleEdit(todo)"
+                v-show="!todo.isEdit">编辑
         </button>
     </li>
 </template>
@@ -47,6 +49,10 @@ export default {
             } else {
                 this.$set(todo, 'isEdit', true);
             }
+            // this.$refs.inputTitle.focus(); # 无效语句，因为vue在执行所有的语句之后才重新解析模板
+            this.$nextTick(()=>{
+                this.$refs.inputTitle.focus();
+            })
         },
         // 失去焦点（真正执行修改逻辑）
         handleBlur(todo, event) {

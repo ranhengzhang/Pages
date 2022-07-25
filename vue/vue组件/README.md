@@ -340,3 +340,181 @@ new Vue ({
 >   最好在`beforeDestory`钩子中，用`$off`解绑**<u>当前组件</u>**所用到的事件
 
 ## 消息订阅与发布
+
+>   [Vue中的消息订阅与发布（pubsub）\_李公子丶的博客-CSDN博客\_vue的pubsub](https://blog.csdn.net/qq_54527592/article/details/119539352 ':include')
+
+## API
+
+### $nextTick
+
+```javascript
+Vue.nextTick(()=>{
+    ...
+})
+```
+
+在下一次DOM更新结束后执行其指定的回调
+
+一般在「需要改变数据后，要基于更新后的新DOM进行某些操作」时，要在`$nextTick`所指定的回调函数中执行
+
+>   其实也可以写一个无回调时间的定时器，因为定时器会被推向队列，自然就会在「vue执行」之后执行了
+
+>   [API — Vue.js](https://cn.vuejs.org/v2/api/#Vue-nextTick)
+
+## Vue封装的过渡与动画
+
+### 动画
+
+```vue
+<template>
+    <div>
+        <button @click="isShow = !isShow">显示/隐藏</button>
+        <transition appear>
+            <h1 v-show="isShow">你好啊！</h1>
+        </transition>
+        <transition name="igubigu" appear>
+            <h1 v-show="!isShow">你好啊！</h1>
+        </transition>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "Test",
+    data() {
+        return {
+            isShow: true,
+        }
+    },
+}
+</script>
+
+<style scoped>
+h1 {
+    background-color: orange;
+}
+
+.v-enter-active {
+    animation: macabaca 1s ease-in-out;
+}
+
+.v-leave-active {
+    animation: macabaca 1s ease-in-out reverse;
+}
+
+.igubigu-enter-active {
+    animation: macabaca 1s ease-in-out;
+}
+
+.igubigu-leave-active {
+    animation: macabaca 1s ease-in-out reverse;
+}
+
+@keyframes macabaca {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+</style>
+```
+
+![20220726021616230](img/README/20220726021616230.gif)
+
+### 过渡
+
+```vue
+<template>
+    <div>
+        <button @click="isShow = !isShow">显示/隐藏</button>
+        <transition-group name="igubigu">
+            <h1 v-show="isShow" key="1">你好啊！</h1>
+            <h1 v-show="!isShow" key="2">你好啊！</h1>
+        </transition-group>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "Test2",
+    data() {
+        return {
+            isShow: true,
+        }
+    },
+}
+</script>
+
+<style scoped>
+h1 {
+    background-color: orange;
+}
+
+/* 进入的起点 */
+.igubigu-enter,
+/* 离开的终点 */
+.igubigu-leave-to {
+    transform: translateX(-100%);
+}
+
+/* 进入的终点 */
+.igubigu-enter-to,
+/* 离开的起点 */
+.igubigu-leave {
+    transform: translateX(0);
+}
+
+.igubigu-enter-active,
+.igubigu-leave-active {
+    transition: 1s ease-in-out;
+}
+</style>
+```
+
+![20220726030202793](img/README/20220726030202793.gif)
+
+>   如果有多个元素使用同一动画，则需要使用`transition-group`，同时**<u>将每个组件加上`key`</u>**
+
+>   **使用外部库**
+>
+>   ```vue
+>   <template>
+>       <div>
+>           <button @click="isShow = !isShow">显示/隐藏</button>
+>           <transition-group name="animate__animated animate__bounce"
+>                             enter-active-class="animate__swing"
+>                             leave-active-class="animate__backOutUp"
+>                             appear>
+>               <h1 v-show="isShow" key="1">你好啊！</h1>
+>               <h1 v-show="!isShow" key="2">你好啊！</h1>
+>           </transition-group>
+>       </div>
+>   </template>
+>   
+>   <script>
+>   import 'animate.css'
+>   
+>   export default {
+>       name: "Test3",
+>       data() {
+>           return {
+>               isShow: true,
+>           }
+>       },
+>   }
+>   </script>
+>   
+>   <style scoped>
+>   h1 {
+>       background-color: orange;
+>   }
+>   </style>
+>   ```
+>
+>   ![20220726030342274](img/README/20220726030342274.gif)
+
+---
+
+>   推荐阅读：[进入/离开 & 列表过渡 — Vue.js](https://cn.vuejs.org/v2/guide/transitions.html)
