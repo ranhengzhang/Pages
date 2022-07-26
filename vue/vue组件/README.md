@@ -518,3 +518,57 @@ h1 {
 ---
 
 >   推荐阅读：[进入/离开 & 列表过渡 — Vue.js](https://cn.vuejs.org/v2/guide/transitions.html)
+
+## ajax
+
+### 跨域请求
+
+#### 代理服务器
+
+使用一个与自己同IP，同端口的服务器（`localhost:8080`），将请求发送给该服务器，则不会有同源问题，之后由于该服务器与目标服务器是**服务器——服务器**的通信，是通过`http`请求进行的，所以不会有同源要求
+
+>   **注意**
+>
+>   同源问题发生时，请求成功发出，浏览器正常接收，但是**浏览器不会将接收到的数据给`js`程序**
+
+##### 配置单个代理
+
+```javascript
+// vue.config.js
+module.exports = defineConfig({
+  devServer: {
+    proxy: 'http://localhost:5000'
+  }
+})
+```
+
+>   解决问题「『连接中断』警告」：[记录载入页面时与 ws://XXX地址/sockjs-node/xxx/websocket 的连接中断---解决办法\_相与还的博客-CSDN博客](https://blog.csdn.net/xc9711/article/details/123144894)
+
+>   如果`public`目录中已经存在了同名文件，则以`public`目录中的文件优先
+>
+>   所以单个代理无法实现更精准的控制
+
+##### 配置多个代理
+
+```javascript
+// vue.config.js
+module.exports = {
+  devServer: {
+    proxy: {
+      '/api': {
+        target: '<url>',
+        pathRewrite: {'^/api': ''}, // 替换请求链接中的内容
+        ws: true,
+        changeOrigin: true // 用于控制请求头中的host字段
+      },
+      '/foo': {
+        target: '<other_url>'
+      }
+    }
+  }
+}
+```
+
+---
+
+推荐阅读：[配置参考 | Vue CLI](https://cli.vuejs.org/zh/config/#devserver-proxy)
