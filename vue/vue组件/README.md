@@ -572,3 +572,174 @@ module.exports = {
 ---
 
 推荐阅读：[配置参考 | Vue CLI](https://cli.vuejs.org/zh/config/#devserver-proxy)
+
+### vue-resource
+
+>   vue的一个插件库，现维护频率较低，不推荐使用
+
+## 插槽
+
+插槽可以将组件标签中的内容放到指定位置
+
+### 默认插槽
+
+```vue
+// App.vue
+<template>
+    <div class="container">
+        <MyCategory>
+            <img src="http://img.pconline.com.cn/images/upload/upc/tx/photoblog/1312/11/c0/29510695_29510695_1386708897121.jpg">
+        </MyCategory>
+        <MyCategory/>
+    </div>
+</template>
+
+<script>
+export default {
+    ...
+}
+</script>
+
+<style>
+...
+</style>
+```
+
+```vue
+// MyCategory.vue
+<template>
+    <div class="category">
+        <!-- 定义一个插槽 -->
+        <slot>这是默认值，如果使用者没有传入内容，则显示默认值</slot>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "MyCategory"
+}
+</script>
+
+<style scoped>
+...
+</style>
+```
+
+### 具名插槽
+
+```vue
+// App.vue
+<template>
+    <div class="container">
+        <MyCategory title="美食" :listData="foods">
+            <template v-slot:center>
+                <img src="...">
+            </template>
+            <template v-slot:footer>
+                <a href="https://www.bh3.com/">崩坏三</a>
+            </template>
+        </MyCategory>
+    </div>
+</template>
+
+<script>
+export default {
+    ...
+    data() {
+        return {
+            foods: ['火锅', '烧烤', '小龙虾', '牛排'],
+        }
+    },
+}
+</script>
+
+<style scoped>
+...
+</style>
+```
+
+```vue
+// MyCategory.vue
+<template>
+    <div class="category">
+        <h3>{{ title }}分类</h3>
+        <!-- 定义一个插槽 -->
+        <slot name="center">
+            <ul>
+                <li v-for="(item, index) in listData" :key="index">{{ item }}</li>
+            </ul>
+        </slot>
+        <slot name="footer"></slot>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "MyCategory",
+    props: ['title', 'listData']
+}
+</script>
+
+<style scoped>
+...
+</style>
+```
+
+### 作用域插槽
+
+>   旧的作用域插槽已被废弃，新的插槽请参阅[插槽 — Vue.js](https://cn.vuejs.org/v2/guide/components-slots.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD)
+
+```vue
+// App.vue
+<template>
+    <div class="container">
+        <MyCategory title="游戏">
+            <template v-slot:default="source"><!-- 接收数据 -->
+                <ul>
+                    <li v-for="(item, index) in source.games" :key="index">{{ item }}</li>
+                </ul>
+            </template>
+        </MyCategory>
+</template>
+
+<script>
+export default {
+    ...
+}
+</script>
+
+<style scoped>
+...
+</style>
+```
+
+```vue
+// MyCategory.vue
+<template>
+    <div class="category">
+        <h3>{{ title }}分类</h3>
+        <slot :games="games"><!-- 发送数据 -->
+        </slot>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "MyCategory",
+    props: ['title'],
+    data() {
+        return {
+            games: ['崩坏三', '原神', '崩坏：星穹铁道', '绝区零'],
+        }
+    },
+}
+</script>
+
+<style scoped>
+...
+</style>
+```
+
+>   作用域插槽中的数据流向是**子组件==>父组件**
+>
+>   一般作用域插槽`v-slot:插槽名="..."`，但是如果插槽没有命名，则可以写为`v-slot:default="..."`，更可以简写为`v-slot="..."`
