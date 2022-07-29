@@ -14,3 +14,13 @@ vuex是专门在Vue中实现集中式状态（数据）管理的一个Vue插件�
 
 <!-- tabs:end -->
 
+## vuex工作原理
+
+![img](img/README/20220730020034572.png)
+
+>   如果不需要进行多余的统筹工作，则可以直接在Vue组件调用`commit`绕过`Actions`
+>
+>   ```mermaid
+>   graph LR
+>   	A["Vue Components"]--"Commit"-->B["Mutations"]
+>   ```
