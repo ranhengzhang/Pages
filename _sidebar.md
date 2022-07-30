@@ -8,4 +8,5 @@
     -   [vue组件](vue/vue%E7%BB%84%E4%BB%B6/README.md)
     -   [vue脚手架](vue/vue%E8%84%9A%E6%89%8B%E6%9E%B6/README.md)
     -   [vuex](vue/vuex/README.md)
+    -   [路由](vue/%E8%B7%AF%E7%94%B1/README.md)
 -   [★收藏夹★](favorites/)
