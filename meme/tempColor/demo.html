@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.8/vue.js" integrity="sha512-aQ0A39cadufUhzw4jPaQ1KoHF4iH3GzmRu49mmoVrj7/WPvM8mcSz51DcWqYc0XPWqGuTmTV1Z0rG6XyRiAplw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-js/1.0.1/color.js" integrity="sha512-zXHWlN+vi1A8FcoJN7NUprrM2pTph/b20Um9WeTfNF/2Fn0yeD8kzD+TMYRwhSuYTIzZwP4hkRaJNfGvM9rrAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body,
+        html,
+        #root {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #root {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #root > div {
+            text-align: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<div id="root" :style="sty">
+    <div>
+        <input type="range" v-model.number="temp" min="-10" max="40"/>
+        <br/>温度：{{temp}}℃<br/>
+        {{sty.backgroundColor}}
+    </div>
+</div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            temp: 10,
+        },
+        methods: {
+            Color: window.net.brehaut.Color
+        },
+        computed: {
+            red(){
+                return Math.floor((this.temp) * 25.5)
+            },
+            green(){
+                return Math.floor((15 - Math.abs(15 - this.temp)) * 25.5)
+            },
+            blue(){
+                return Math.floor((20 - this.temp) * 25.5)
+            },
+            light(){
+                return (13 - Math.abs(15 - this.temp) / 5) / 10
+            },
+            sty(){
+                return {
+                    backgroundColor: this.Color([this.red, this.green, this.blue]).blend(this.Color('#000'), 1 - this.light).toCSS()
+                }
+            }
+        }
+    });
+</script>
+</html>
