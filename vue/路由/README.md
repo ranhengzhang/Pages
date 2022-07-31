@@ -114,4 +114,27 @@ export default new VueRouter({
 
 **==在组件中，跳转链接需要些完整链接==**
 
+>   一般嵌套不超过六层
+
 ## 路由传参
+
+>   **方法一**
+>
+>   直接在`to`后的链接后添加`?key=value`（query格式）
+>
+>   ```html
+>   <router-link :to="`path?key=${value}`"
+>   ```
+
+>   **方法二**
+>
+>   参数较多时，将`to`的内容写为一个对象（对象格式）
+>
+>   ```html
+>   <router-link :to="{
+>       path: 'path',
+>       query: {
+>           key: value,
+>       },
+>   }">{{message.title}}</router-link>
+>   ```
