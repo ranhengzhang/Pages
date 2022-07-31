@@ -219,3 +219,10 @@ export default new VueRouter({
 
 把`to`改为对象形式，不写`path`，而是写`name`，`name`在`router/index.js`中提前配置
 
+## `router-link`的`replace`属性
+
+```html
+<router-link replace></router-link>
+```
+
+>   推荐阅读：[Vue路由跳转-push，replace的区别\_```陪伴的博客-CSDN博客\_vue路由push和replace用法](https://blog.csdn.net/Jk200165/article/details/124354711)
