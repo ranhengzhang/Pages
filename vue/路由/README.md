@@ -164,6 +164,58 @@ export default new VueRouter({
 
 >   `params`传参时，必须使用`name`，不能使用`path`
 
+### `props`
+
+#### 值为对象
+
+```javascript
+// router\index.js
+{
+    name: 'igubigu',
+    path: 'detail/',
+    component: MyDetail,
+    props: {
+        key: value
+    }
+}
+```
+
+该方式会将`props`中的所有`key-value`都会以`props`的形式传给对应组件
+
+#### 值为`true`
+
+```javascript
+// router\index.js
+{
+    name: 'igubigu',
+    path: 'detail/',
+    component: MyDetail,
+    props: true
+}
+```
+
+该方法会将该组件收到的所有`params`参数==以`props`的形式传递==
+
+#### 值为函数
+
+```javascript
+// router\index.js
+{
+    name: 'igubigu',
+    path: 'detail/',
+    component: MyDetail,
+    props($route) {
+        return {
+            id: $route.query.id,
+            title: $route.query.title
+        }
+    }
+}
+```
+
+>   获取参数时可以结构赋值：`props({query})`或`props({query:{id, title}})`
+
 ## 简化路径
 
 把`to`改为对象形式，不写`path`，而是写`name`，`name`在`router/index.js`中提前配置
+
