@@ -118,12 +118,14 @@ export default new VueRouter({
 
 ## 路由传参
 
+### `query`
+
 >   **方法一**
 >
 >   直接在`to`后的链接后添加`?key=value`（query格式）
 >
 >   ```html
->   <router-link :to="`path?key=${value}`"
+>   <router-link :to="`path?key=${value}`"></router-link>
 >   ```
 
 >   **方法二**
@@ -136,5 +138,32 @@ export default new VueRouter({
 >       query: {
 >           key: value,
 >       },
->   }">{{message.title}}</router-link>
+>   }">...</router-link>
 >   ```
+
+取参数时，从`$route.query`中取
+
+### `params`
+
+将`query`写法中的`query`改为`params`
+
+>   `to`中不以`query`形式传参，而是在地址后加上`/value...`
+>
+>   ```html
+>   <router-link :to="`path/value1/value2`"></router-link>
+>   
+>   <router-link :to="{
+>       name: 'name',
+>       params: {
+>           key: value,
+>       },
+>   }">...</router-link>
+>   ```
+>
+>   在`router/index.js`中配置时，路径后加上`/:key1/:key2...`
+
+>   `params`传参时，必须使用`name`，不能使用`path`
+
+## 简化路径
+
+把`to`改为对象形式，不写`path`，而是写`name`，`name`在`router/index.js`中提前配置
