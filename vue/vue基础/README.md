@@ -554,3 +554,9 @@ directives: {
 ![生命周期](img/README/20220713001240989.png)
 
 >   图源：[尚硅谷Vue2.0+Vue3.0全套教程丨vuejs从入门到精通\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1Zy4y1K7SH?p=49&share_source=copy_web)
+
+>   除了图中的八个生命周期，还有三个生命周期：
+>
+>   -   `this.$nextTick`：一般在方法中调用，表示在下次`dom`刷新之后需要执行的任务
+>   -   `activated`：路由组件激活
+>   -   `deactivated`：路由组件失活
