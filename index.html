@@ -12,7 +12,7 @@
   <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">加载中</div>
   <script>
     var num = 0;
     mermaid.initialize({ startOnLoad: false });
@@ -20,9 +20,13 @@
     window.$docsify = {
       name: '笔记本',
       loadSidebar: true,
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+        '/.*/_navbar.md': '/_navbar.md',
+      },
       subMaxLevel: 6,
       coverpage: true,
-      repo: 'ranhengzhangr/Pages',
+      repo: 'ranhengzhang/Pages',
       loadNavbar: true,
       themeColor: '#4d80e6',
       search: {

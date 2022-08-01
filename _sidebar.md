@@ -2,7 +2,7 @@
     -   [目录](50projects50days/README.md)
     -   [day1](50projects50days/day1/)
     -   [day2](50projects50days/day2/)
--   Vue
+-   [Vue](vue/)
     -   [Vue基础](vue/vue%E5%9F%BA%E7%A1%80/README.md)
     -   [MVVM](vue/vue%E5%9F%BA%E7%A1%80/MVVM.md)
     -   [vue组件](vue/vue%E7%BB%84%E4%BB%B6/README.md)
@@ -10,5 +10,5 @@
     -   [vuex](vue/vuex/README.md)
     -   [路由](vue/%E8%B7%AF%E7%94%B1/README.md)
 -   [★收藏夹★](favorites/)
--   [meme]
+-   meme
     -   [气温==>颜色](meme/tempColor/README.md)
