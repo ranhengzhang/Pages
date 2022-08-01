@@ -26,7 +26,7 @@ export default new VueRouter({
                     children: [
                         {
                             name: 'igubigu',
-                            path: 'detail/:id/:title',
+                            path: 'detail/',
                             component: MyDetail,
                             // props: {
                             //     a: 1,

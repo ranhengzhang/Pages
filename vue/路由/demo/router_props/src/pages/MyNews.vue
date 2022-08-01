@@ -8,7 +8,10 @@
 
 <script>
 export default {
-    name: "MyNews"
+    name: "MyNews",
+    beforeDestroy() {
+        console.log(1)
+    }
 }
 </script>
 

@@ -226,3 +226,75 @@ export default new VueRouter({
 ```
 
 >   推荐阅读：[Vue路由跳转-push，replace的区别\_```陪伴的博客-CSDN博客\_vue路由push和replace用法](https://blog.csdn.net/Jk200165/article/details/124354711)
+
+## 编程式路由导航
+
+有时并不使用`a`标签进行跳转（`<router-link></router-link>`标签最终会被转为`a`标签），这是就会给元素绑定`click`事件，在`click`事件中调用`$router`的方法实现跳转
+
+### `push`
+
+```javascript
+this.$router.push({
+    name: 'igubigu',
+    query: {
+        id: message.id,
+        title: message.title,
+    }
+});
+```
+
+### `replace`
+
+```javascript
+this.$router.replace({
+    name: 'igubigu',
+    query: {
+        id: message.id,
+        title: message.title,
+    }
+})
+```
+
+### `back`
+
+```javascript
+this.$router.back();
+```
+
+>   回退到上一历史记录页面
+
+### `forward`
+
+```javascript
+this.$router.forward();
+```
+
+>   前进到下一历史记录页面
+
+### `go`
+
+```typescript
+this.$router.go(n: Number);
+```
+
+>   如果传入正数就前进`n`条历史记录，如果传入负数就是倒退
+>
+>   如果步数不够则不会响应
+
+## 缓存路由组件
+
+因为组件切走之后会被销毁，所以组件中的表单项也会丢失，如果希望切回来之后内容保留，可以使用`<keep-alive>`标签包裹住`<router-view>`标签
+
+>   `<keep-alive>`标签默认会保持包裹住的所有路由组件，如果只希望某些组件被缓存，就需要添加`include`属性指定需要缓存的***组件*名**
+>
+>   如果有多个组件，则使用`:include="['MyNews', 'MyMessage']"`的格式（也可以直接在字符串中使用`,`分隔，或在字符串中使用正则）
+
+### 被缓存组件的新钩子
+
+#### activated
+
+激活
+
+#### deactivated
+
+失活
