@@ -28,7 +28,7 @@
 <body>
 <div id="root" :style="sty">
     <div>
-        <input type="range" v-model.number="temp" min="-10" max="40"/>
+        <input type="range" v-model.number="temp" :min="min" :max="max" @wheel.prevent="wheeling"/>
         <br/>温度：{{temp}}℃<br/>
         {{sty.backgroundColor}}
     </div>
@@ -39,11 +39,23 @@
         el: '#root',
         data: {
             temp: 10,
+            min: -10,
+            max: 40,
         },
         methods: {
-            Color: window.net.brehaut.Color
+            Color: window.net.brehaut.Color,
+            wheeling(event) {
+                if (event.deltaY > 0) {
+                    if (this.temp > this.min)
+                        this.temp--;
+                } else {
+                    if(this.temp < this.max)
+                        this.temp++;
+                }
+            }
         },
         computed: {
+            /// [demo1]
             red(){
                 return Math.floor((this.temp) * 25.5)
             },
@@ -56,11 +68,14 @@
             light(){
                 return (13 - Math.abs(15 - this.temp) / 5) / 10
             },
+            /// [demo1]
+            /// [demo2]
             sty(){
                 return {
                     backgroundColor: this.Color([this.red, this.green, this.blue]).blend(this.Color('#000'), 1 - this.light).toCSS()
                 }
             }
+            /// [demo2]
         }
     });
 </script>

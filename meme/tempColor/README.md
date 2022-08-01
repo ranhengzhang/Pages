@@ -29,11 +29,11 @@
 
 根据以上图片写出对应函数计算各属性的值
 
-[计算属性](demo.html ':include :type=code javascript :fragment=demo1')
+[计算属性](demo.html ':include :type=code :fragment=demo1 javascript')
 
 再使用封装好的API生成颜色即可（这里使用的color-js对颜色进行操作）
 
-[颜色生成](demo.html ':include :type=code javascript :fragment=demo2')
+[颜色生成](demo.html ':include :type=code :fragment=demo2 javascript')
 
 ## 显示结果
 
@@ -56,4 +56,3 @@ ce(
     (13 - mu(abs, 15 - wi(temp)) / 5) * 10
 )
 ```
-
