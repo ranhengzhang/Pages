@@ -4,30 +4,52 @@ import MyHome from "@/pages/MyHome";
 import MyNews from "@/pages/MyNews";
 import MyMessage from "@/pages/MyMessage";
 import MyDetail from "@/pages/MyDetail";
+import {next} from "lodash/seq";
 
-export default new VueRouter({
+// export default new VueRouter({
+const router = new VueRouter({
     routes: [
         {
             name: 'macabaca',
             path: '/about',
             component: MyAbout,
+            meta: {
+                title: '关于'
+            },
         },
         {
+            name: 'zhuye',
             path: '/home',
             component: MyHome,
+            meta: {
+                title: '主页'
+            },
             children: [
                 {
+                    name: 'xinwen',
                     path: 'news',
                     component: MyNews,
+                    meta: {
+                        isAuth: true,
+                        title: '新闻'
+                    },
                 },
                 {
+                    name: 'xiaoxi',
                     path: 'message',
                     component: MyMessage,
+                    meta: {
+                        isAuth: true,
+                        title: '消息'
+                    },
                     children: [
                         {
                             name: 'igubigu',
                             path: 'detail/',
                             component: MyDetail,
+                            meta: {
+                                title: '详情'
+                            },
                             // props: {
                             //     a: 1,
                             //     b: '2',
@@ -46,3 +68,22 @@ export default new VueRouter({
         }
     ]
 });
+
+router.beforeEach((to, from, next)=>{
+    // if (to.path.search(/\/home\/(news|message)/) !== -1) {
+    if (to.meta.isAuth) { // 判断是否需要鉴权
+        if (localStorage.getItem('school') === 'macabaca') {
+            next()
+        } else {
+            alert('invalid school')
+        }
+    } else {
+        next()
+    }
+})
+
+router.afterEach((to, from) => {
+    document.title = to.meta.title || '玛卡巴卡'
+})
+
+export default router

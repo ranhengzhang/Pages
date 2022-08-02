@@ -298,3 +298,83 @@ this.$router.go(n: Number);
 #### deactivated
 
 失活
+
+## 路由守卫
+
+### 全局路由守卫
+
+#### 前置路由守卫
+
+设置路由权限
+
+只有当满足一定条件时才能使用对应的路由
+
+设置路由守卫时，应当在`router/index.js`中设置：
+
+```javascript
+const router = new VueRouter({
+    routes: [
+        ...
+    ]
+});
+
+router.beforeEach((...)=>{
+    ...
+})
+
+export default router
+```
+
+路由对象创建后不能马上暴露，应当设置路由守卫之后暴露，设置路由守卫使用的是路由对象的`beforeEach`方法，表示**每一次路由切换*之前***执行的任务
+
+>   `router.beforeEach`为全局前置路由守卫（每次路由切换之前被调用，以及初始化的时候被调用）
+>
+>   该方法中的函数会接收三个参数：`to`、`form`、`next`
+>
+>   放行访问使用`next`方法：
+>
+>   ```javascript
+>   router.beforeEach((to, from, next)=>{
+>       ...
+>       next()
+>       ...
+>   })
+>   ```
+
+#### 后置路由守卫
+
+```javascript
+const router = new VueRouter({
+    routes: [
+        ...
+    ]
+});
+
+router.afterEach((...)=>{
+    ...
+})
+
+export default router
+```
+
+>   每次路由切换之前，以及初始化的时候被调用
+>
+>   后置路由守卫的参数只有`to`和`from`，没有`next`，因为`next`参数时用来控制是否进行跳转的方法
+
+#### 在路由中配置
+
+如果有太多路由需要校验，在`beforeEach`会很麻烦，所以一般在路由中就配置：
+
+```javascript
+{
+    ...
+    meta: {
+        isAuth: true
+    },
+    ...
+},
+```
+
+`meta`是路由元信息，即程序员自定义的信息，可以通过`to.meta.xxx`获取内容
+
+### 独享路由守卫
