@@ -8,6 +8,7 @@ import {next} from "lodash/seq";
 
 // export default new VueRouter({
 const router = new VueRouter({
+    mode: "history",
     routes: [
         {
             name: 'macabaca',
@@ -33,17 +34,17 @@ const router = new VueRouter({
                         isAuth: true,
                         title: '新闻'
                     },
-                    beforeEnter(to, from, next) {
-                        if (to.meta.isAuth) {
-                            if (localStorage.getItem('school') === 'macabaca') {
-                                next()
-                            } else {
-                                alert('invalid school')
-                            }
-                        } else {
-                            next()
-                        }
-                    }
+                    // beforeEnter(to, from, next) {
+                    //     if (to.meta.isAuth) {
+                    //         if (localStorage.getItem('school') === 'macabaca') {
+                    //             next()
+                    //         } else {
+                    //             alert('invalid school')
+                    //         }
+                    //     } else {
+                    //         next()
+                    //     }
+                    // }
                 },
                 {
                     name: 'xiaoxi',

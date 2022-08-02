@@ -392,3 +392,79 @@ export default router
 ```
 
 >   **独享路由守卫只有前置，没有后置！**
+
+### 组件内路由守卫
+
+组件内路由守卫在组件中配置，与钩子类似，为三个方法
+
+#### `beforeRouteEnter`
+
+```javascript
+export default {
+    name: ...,
+    beforeRouteEnter(to, from, next) {
+        ...
+    },
+}
+```
+
+该方法会在**进入路由组件时调用**
+
+>   如果路由组件不是通过路由进入，而是直接被静态放在父组件中，那么进入父组件时不会调用
+
+#### `beforeRouteLeave`
+
+```javascript
+export default {
+    name: ...,
+    beforeRouteLeave(to, from, next) {
+        ...
+    },
+}
+```
+
+该方法在<font size=5>**离开**</font>路由组件时调用，注意与`afterEach`的含义区分
+
+#### `beforeRouteUpdate`
+
+```javascript
+export default {
+    name: ...,
+    beforeRouteUpdate(to, from, next) {
+        ...
+    },
+}
+```
+
+>   在当前路由改变，但是该组件被复用时调用
+>   举例来说，对于一个带有动态参数的路径 `/users/:id`，在 `/users/1` 和 `/users/2` 之间跳转的时候，
+>   由于会渲染同样的 `UserDetails` 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+>   因为在这种情况发生的时候，组件已经挂载好了，导航守卫可以访问组件实例 `this`
+>
+>   **来源：**[导航守卫 | Vue Router](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E5%8F%AF%E7%94%A8%E7%9A%84%E9%85%8D%E7%BD%AE-api)
+
+## 路由重定向和别名
+
+>   [重定向和别名 | Vue Router](https://v3.router.vuejs.org/zh/guide/essentials/redirect-and-alias.html#%E9%87%8D%E5%AE%9A%E5%90%91)
+
+## 路由工作模式
+
+更改路由工作模式的选项在`router/index.js`中：
+
+```javascript
+const router = new VueRouter({
+    mode: ...,
+}
+```
+
+### hash模式
+
+Vue路径中的`#`后的内容称为哈希值（这里的哈希与数据结构中的哈希无关）
+
+hash值不会随着http请求发送给服务器
+
+### history模式
+
+该模式不会出现`#`符号，使得浏览器路径与正常路径相似，但是兼容性略差
+
+如果使用history模式，项目部署后可能出现404问题（没有`#`分隔hash，导致向服务器发送了错误的请求）

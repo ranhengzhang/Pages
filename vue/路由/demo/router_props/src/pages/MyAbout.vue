@@ -4,7 +4,16 @@
 
 <script>
 export default {
-    name: "MyAbout"
+    name: "MyAbout",
+    beforeRouteEnter(to, from, next) {
+        next()
+    },
+    beforeRouteLeave(to, from, next) {
+        next()
+    },
+    beforeRouteUpdate(to, from) {
+
+    },
 }
 </script>
 
