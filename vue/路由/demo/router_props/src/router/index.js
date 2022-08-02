@@ -33,6 +33,17 @@ const router = new VueRouter({
                         isAuth: true,
                         title: '新闻'
                     },
+                    beforeEnter(to, from, next) {
+                        if (to.meta.isAuth) {
+                            if (localStorage.getItem('school') === 'macabaca') {
+                                next()
+                            } else {
+                                alert('invalid school')
+                            }
+                        } else {
+                            next()
+                        }
+                    }
                 },
                 {
                     name: 'xiaoxi',
@@ -69,21 +80,21 @@ const router = new VueRouter({
     ]
 });
 
-router.beforeEach((to, from, next)=>{
-    // if (to.path.search(/\/home\/(news|message)/) !== -1) {
-    if (to.meta.isAuth) { // 判断是否需要鉴权
-        if (localStorage.getItem('school') === 'macabaca') {
-            next()
-        } else {
-            alert('invalid school')
-        }
-    } else {
-        next()
-    }
-})
-
-router.afterEach((to, from) => {
-    document.title = to.meta.title || '玛卡巴卡'
-})
+// router.beforeEach((to, from, next)=>{
+//     // if (to.path.search(/\/home\/(news|message)/) !== -1) {
+//     if (to.meta.isAuth) { // 判断是否需要鉴权
+//         if (localStorage.getItem('school') === 'macabaca') {
+//             next()
+//         } else {
+//             alert('invalid school')
+//         }
+//     } else {
+//         next()
+//     }
+// })
+//
+// router.afterEach((to, from) => {
+//     document.title = to.meta.title || '玛卡巴卡'
+// })
 
 export default router
