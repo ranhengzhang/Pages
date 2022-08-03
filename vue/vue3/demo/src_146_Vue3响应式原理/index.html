@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    let person = {
+        name: 'Mary',
+        age: 30,
+    };
+
+    // 模拟Vue2的响应式
+    // region Vue2
+    // let p = {};
+    // Object.defineProperty(p, 'name', {
+    //     get() {
+    //         return person.name;
+    //     },
+    //     set(value) {
+    //         person.name = value;
+    //         console.log('name changed');
+    //     },
+    // });
+    // Object.defineProperty(p, 'age', {
+    //     get() {
+    //         return person.age;
+    //     },
+    //     set(value) {
+    //         person.age = value;
+    //         console.log('age changed');
+    //     },
+    // });
+    // endregion
+
+    // 模拟Vue3的响应式
+    // region Vue3
+    const p = new Proxy(person, {
+        get(target, p, receiver) {
+            console.log('get', p);
+            return Reflect.get(target, p);
+        },
+        set(target, p, value, receiver) {
+            Reflect.set(target, p, value);
+            console.log('set', p);
+        },
+        deleteProperty(target, p) {
+            console.log('delete', p);
+            return Reflect.deleteProperty(target, p);
+        }
+    })
+    // endregion
+
+    let obj = {a: 1, b: 2};
+    // 通过Object.defineProperty操作
+    // region Object.defineProperty
+    // try {
+    //     Object.defineProperty(obj, 'c', {
+    //         get() {
+    //             return 10086;
+    //         },
+    //     });
+    //     Object.defineProperty(obj, 'c', {
+    //         get() {
+    //             return 10011;
+    //         },
+    //     });
+    // } catch (error) {
+    //     console.log(error);
+    // }
+    // endregion
+
+    // 通过Reflect.defineProperty操作
+    // region Reflect.defineProperty
+    // const x1 = Reflect.defineProperty(obj, 'c', {
+    //     get() {
+    //         return 10086;
+    //     },
+    // });
+    // console.log(x1);
+    // const x2 = Reflect.defineProperty(obj, 'c', {
+    //     get() {
+    //         return 10011;
+    //     },
+    // });
+    // console.log(x2);
+    // endregion
+</script>
+</html>

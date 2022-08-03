@@ -1,43 +1,38 @@
 <template>
     <h1>一个人的信息</h1>
-    <h1>姓名：{{name}}</h1>
-    <h1>年龄：{{age}}</h1>
-    <h1>性别：{{sex}}</h1>
-    <button @click="sayHello">说话</button>
-    <br>
-    <button @click="sayWelcome">欢迎</button>
+    <h3>姓名：{{person.name}}</h3>
+    <h3>年龄：{{person.age}}</h3>
+    <h3>工作种类：{{person.job.type}}</h3>
+    <h3>工作薪水：{{person.job.salary}}</h3>
+    <button @click="changeInfo">修改人的信息</button>
 </template>
 
 <script>
-import {h} from "vue";
+import {h, reactive, ref} from "vue";
 
 export default {
     name: 'App',
-    data() {
-        return {
-            sex: '男',
-        }
-    },
-    methods: {
-        sayWelcome() {
-            alert('Welcome');
-        },
-    },
-    // 只是测试setup，不考虑响应式
     setup() {
         // 配置data
-        let name = 'john';
-        let age = 30;
+        let person = reactive({
+            name: 'john',
+            age: 30,
+            job: {
+                type: '前端工程师',
+                salary:'3k',
+            },
+        });
 
-        // 配置methods
-        function sayHello() {
-            alert(`name:${name}|age:${age}`)
+        function changeInfo() {
+            person.name = 'Mary';
+            person.age = 18;
+            person.job.type = '洋葱';
+            person.job.salary = '￥0.95/斤';
         }
         
         return {
-            name,
-            age,
-            sayHello
+            person,
+            changeInfo,
         }
 
         // 返回一个渲染函数
