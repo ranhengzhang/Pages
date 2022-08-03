@@ -163,3 +163,21 @@ createApp(App).mount('#app')
 >   `Proxy`对象中的
 
 ## 计算属性与监视属性
+
+### 计算属性
+
+```javascript
+value = computed(()=>{
+    ...
+})
+
+value = computed({
+    get() {
+        ...
+    },
+    set(value) {
+        ...
+    }
+})
+```
+
