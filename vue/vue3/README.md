@@ -181,3 +181,27 @@ value = computed({
 })
 ```
 
+### 监听属性
+
+>   推荐阅读：[侦听器 | Vue.js](https://staging-cn.vuejs.org/guide/essentials/watchers.html#basic-example)
+
+>   如果是监视一个`reactive`对象，不管是否开启深度监听，都会监听到深度数据，而且返回的`newValue`和`oldValue`是相同的，因为它们**指向的是同一个对象**
+>
+>   深度监听是无法关闭的
+>
+>   如果*以回调函数的形式*监听一个`reactive`对象**中的一个引用类型数据**，则需要开启深度监听
+
+>   **对于监视`reactive`对象**
+>
+>   -   `watch(obj, ()=>{})`：`deep`配置无效
+>   -   `watch(()=>obj, ()={})`：`deep`配置有效
+
+>   **关于`.value`**
+>
+>   如果使用`ref`定义一个基本类型， 不需要`.value`
+>
+>   如果使用`ref`定义一个引用类型，需要`.value`，除非开启深度监听
+>
+>   因为`ref`对象监听的是`value`值，而`ref`定义一个引用类型时，`value`值是一个对象，无法普通监听
+>
+>   **可以理解为实际上对`ref`的监听是*`value`的地址有没有发生变化***
