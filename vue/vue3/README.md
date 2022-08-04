@@ -244,3 +244,21 @@ Vue3将关于`create`有关的两个钩子在组合API中取消了（其实还�
 ## `toRef`函数
 
 创建一个`ref`对象，其`value`值指向另一个对象中的某个属性
+
+## 其它组合式API
+
+### `shallowRactive`和`shallowRef`
+
+`shallowRactive`只会响应引用对象的第一层，没有深层次的响应
+
+`shallowRef`同理（有时传递的是一个对象）
+
+### `readonly`和`shallowReadonly`
+
+将一个**响应式数据**转为只读数据
+
+### `toRaw`与`markRaw`
+
+将响应式对象转为普通数据（toRaw只能处理`reactive`对象）
+
+`markRaw`标记一个对象，标记的对象**永远不会成为**响应式数据
