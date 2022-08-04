@@ -239,4 +239,6 @@ Vue3将关于`create`有关的两个钩子在组合API中取消了（其实还�
 
 >   **`hook`**
 >
->   本质是一个函数，把`setup`函数中使用的Composition API进行了封装
+>   本质是一个函数，把`setup`函数中使用的Composition API（组合式API）进行了封装
+
+## `toRef`函数
