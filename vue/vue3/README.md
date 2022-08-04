@@ -205,3 +205,38 @@ value = computed({
 >   因为`ref`对象监听的是`value`值，而`ref`定义一个引用类型时，`value`值是一个对象，无法普通监听
 >
 >   **可以理解为实际上对`ref`的监听是*`value`的地址有没有发生变化***
+
+## `watchEffect`函数
+
+```javascript
+watchEffect(()=>{
+    ...
+});
+```
+
+`watchEffect`不指明监视的对象，而是在回调中使用到的数据改变时调用
+
+>   `watchEffect`和`computed`
+>
+>   -   `computed`注重的是计算结果，必须写返回值
+>   -   `watchEffect`更注重过程，不用写返回值
+
+## 生命周期
+
+![img](img/README/20220805000955568.png)
+
+![20220805001359883](img/README/20220805001359883.svg)
+
+>   图源：[生命周期钩子 | Vue.js](https://staging-cn.vuejs.org/guide/essentials/lifecycle.html)
+
+### 生命周期钩子
+
+Vue3将关于`create`有关的两个钩子在组合API中取消了（其实还是可以写在`setup`外，以Vue2的形式声明）
+
+>   如果同时在组合式API和配置项中声明了生命周期，两者都会执行，只是组合式API中的生命周期钩子执行时间更早
+
+## 自定义`hook`函数
+
+>   **`hook`**
+>
+>   本质是一个函数，把`setup`函数中使用的Composition API进行了封装
