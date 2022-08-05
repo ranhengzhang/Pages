@@ -263,10 +263,144 @@ Vue3将关于`create`有关的两个钩子在组合API中取消了（其实还�
 
 `markRaw`标记一个对象，标记的对象**永远不会成为**响应式数据
 
-## `customRef`
+### `customRef`
 
 创建一个自定义的`ref`，并对其依赖项跟踪和更新触发进行显式控制
 
 >   `trigger`函数通知Vue重新解析模板
 >
 >   `track`函数表示跟踪返回数据的变化
+
+### `provide`与`inject`
+
+实现**祖与后代组件间**通信
+
+父组件有一个 `provide` 选项来提供数据，后代组件有一个 `inject` 选项来开始使用这些数据
+
+### 响应式数据的判断
+
+-   `isRef`：检查一个值是否为一个`ref`对象
+-   `isReactive`：检查一个对象是否是由`reactive`创建的响应式代理
+-   `isReadonly`：检查一个对象是否是由`readonly`创建的只读代理
+-   `isProxy`：检查一个对象是否是由`reactive`或者`readonly`方法创建的代理
+
+## Vue3的新组件
+
+### Fragment
+
+组件可以没有根标签, 内部会将多个标签包含在一个`Fragment`虚拟元素中
+
+### Teleport
+
+将一个组件内部的一部分模板「传送」到该组件的DOM结构外层的位置去
+
+>   推荐阅读：[Teleport | Vue.js](https://staging-cn.vuejs.org/guide/built-ins/teleport.html)
+
+### Suspense
+
+等待异步组件时渲染一些额外内容，让应用有更好的用户体验
+
+>   使用步骤：
+>
+>   1.  异步引入组件
+>
+>       ```javascript
+>       import {defineAsyncComponent} from 'vue'
+>       const Child = defineAsyncComponent(()=>import('./components/Child.vue'))
+>       ```
+>
+>   2.  使用`Suspense`包裹组件，并配置好`default` 与 `fallback`
+>
+>       ```vue
+>       <template>
+>       	<div class="app">
+>       		<h3>我是App组件</h3>
+>       		<Suspense>
+>       			<template v-slot:default>
+>       				<Child/>
+>       			</template>
+>       			<template v-slot:fallback>
+>       				<h3>加载中.....</h3>
+>       			</template>
+>       		</Suspense>
+>       	</div>
+>       </template>
+>       ```
+
+## Vue3中的其它变化
+
+### 全局API转移
+
+|   2.x 全局 API（`Vue`）    |     3.x 实例 API (`app`)      |
+| :------------------------: | :---------------------------: |
+|     `Vue.config.xxxx`      |       `app.config.xxxx`       |
+| `Vue.config.productionTip` |           **移除**            |
+|      `Vue.component`       |        `app.component`        |
+|      `Vue.directive`       |        `app.directive`        |
+|        `Vue.mixin`         |          `app.mixin`          |
+|         `Vue.use`          |           `app.use`           |
+|      `Vue.prototype`       | `app.config.globalProperties` |
+
+### 其它改变
+
+>   `data`始终应该是一个函数
+
+>   过渡类名的更改
+>
+>   Vue2.x写法
+>
+>   ```css
+>   .v-enter,
+>   .v-leave-to {
+>     opacity: 0;
+>   }
+>   .v-leave,
+>   .v-enter-to {
+>     opacity: 1;
+>   }
+>   ```
+>
+>   Vue3.x写法
+>
+>   ```css
+>   .v-enter-from,
+>   .v-leave-to {
+>     opacity: 0;
+>   }
+>   
+>   .v-leave-from,
+>   .v-enter-to {
+>     opacity: 1;
+>   }
+>   ```
+
+>   **移除**keyCode作为`v-on`的修饰符，同时也不再支持`config.keyCodes`
+
+>   **移除**`v-on.native`修饰符
+>
+>   父组件中绑定事件
+>
+>   ```vue
+>   <my-component
+>     v-on:close="handleComponentEvent"
+>     v-on:click="handleNativeClickEvent"
+>   />
+>   ```
+>
+>   子组件中声明自定义事件
+>
+>   ```vue
+>   <script>
+>     export default {
+>       emits: ['close']
+>     }
+>   </script>
+>   ```
+>
+>   已经被声明的`close`事件会作为自定义事件，而未被子组件声明的`click`事件被认为是原生事件，如果声明了，则会作为自定义事件
+
+>   **移除**过滤器
+
+## 语法糖
+
+>   推荐阅读：[Vue3.2的setup语法糖和Hook函数 (强烈推荐) - 掘金](https://juejin.cn/post/7041038709906472974)
