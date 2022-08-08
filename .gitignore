@@ -1,3 +1,10 @@
-*.idea/
-*node_modules/
-*.demo/
+ranhengzhang/**/.idea/
+ranhengzhang/**/node_modules/
+ranhengzhang/**/.demo/
+ranhengzhang/**/.gitignore
+ranhengzhang/vue/**/jsconfig.json
+ranhengzhang/vue/**/babel.config.js
+ranhengzhang/vue/**/package.json
+ranhengzhang/vue/**/package-lock.json
+ranhengzhang/vue/**/.eslintrc.js
+ranhengzhang/vue/**/vue.config.js
