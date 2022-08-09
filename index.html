@@ -72,14 +72,16 @@
       vueComponents: {
         'progress-bar': {
           template: `
-          <div class="box">
-            <div class="progress">
-              <div class="bar" ref="bar" :style="width"></div>
-              <slot>
-                <img src="static/img/progress_bar_button.png" alt="" :style="left">
-              </slot>
+          <div class="rhz_box">
+            <div class="rhz_progress">
+              <div class="rhz_bar" ref="bar" :style="width"></div>
+              <div class="rhz_button" :style="left">
+                <slot>
+                    <img src="static/img/progress_bar_button.png" alt="">
+                </slot>
+                </div>
             </div>
-            <div class="title">{{ title }}的进度：{{ recent }}/{{ total }}</div>
+            <div class="rhz_title">{{ title }}的进度：{{ recent }}/{{ total }}</div>
           </div>`,
           props: {
             title: {default: undefined},

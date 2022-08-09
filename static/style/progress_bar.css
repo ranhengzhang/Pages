@@ -1,8 +1,9 @@
-.box {
+.rhz_box {
     width: 600px;
+    margin: 20px auto;
 }
 
-.progress {
+.rhz_progress {
     position: relative;
     height: 24px;
     width: 100%;
@@ -11,19 +12,28 @@
     border: #ddd solid 2px;
 }
 
-.bar {
+.rhz_bar {
     height: 100%;
     border-radius: inherit;
 }
 
-img {
+.rhz_button {
     width: 48px;
     height: 48px;
     position: absolute;
     top: -16px;
+    border-radius: 50%;
+    border: #ccc 2px solid;
+    background-color: #bbb;
+    overflow: hidden;
 }
 
-.title {
+.rhz_button img {
+    width: 100%;
+    height: 100%;
+}
+
+.rhz_title {
     text-align: center;
     margin-top: 8px;
 }
