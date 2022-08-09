@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
-  <link rel="stylesheet" href="/static/style/progress_bar.css">
+  <link rel="stylesheet" href="static/style/progress_bar.css">
   <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
 </head>
@@ -76,7 +76,7 @@
             <div class="progress">
               <div class="bar" ref="bar" :style="width"></div>
               <slot>
-                <img src="/static/img/progress_bar_button.png" alt="" :style="left">
+                <img src="static/img/progress_bar_button.png" alt="" :style="left">
               </slot>
             </div>
             <div class="title">{{ title }}的进度：{{ recent }}/{{ total }}</div>
