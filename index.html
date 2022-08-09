@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
@@ -8,8 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
+  <link rel="stylesheet" href="/static/style/progress_bar.css">
   <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
 </head>
+
 <body>
   <div id="app">加载中</div>
   <script>
@@ -18,10 +22,10 @@
 
     const users = ['ranhengzhang', 'KYo-Zheng'];
     const alias = {}
-    for(user in users) {
-        user = users[user];
-        alias[`/${user}/.*/_sidebar.md`] = `/${user}/_sidebar.md`;
-        alias[`/${user}/.*/_navbar.md`] = `/${user}/_navbar.md`;
+    for (user in users) {
+      user = users[user];
+      alias[`/${user}/.*/_sidebar.md`] = `/${user}/_sidebar.md`;
+      alias[`.*/_navbar.md`] = `/_navbar.md`;
     }
 
     window.$docsify = {
@@ -40,31 +44,66 @@
         noData: '找不到结果',
         depth: 3,
       },
-      count:{
-            countable:true,
-            fontsize:'0.9em',
-            color:'rgb(90,90,90)',
-            language:'chinese'
-        },
-        tabs: {
-            persist    : true,      // default
-            sync       : true,      // default
-            theme      : 'classic', // default
-            tabComments: true,      // default
-            tabHeadings: true       // default
-        },
-        markdown: {
-            renderer: {
-                code: function(code, lang) {
-                    if (lang === "mermaid") {
-                        return (
-                            '<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
-                        );
-                    }
-                    return this.origin.code.apply(this, arguments);
-                }
+      count: {
+        countable: true,
+        fontsize: '0.9em',
+        color: 'rgb(90,90,90)',
+        language: 'chinese'
+      },
+      tabs: {
+        persist: true,      // default
+        sync: true,      // default
+        theme: 'classic', // default
+        tabComments: true,      // default
+        tabHeadings: true       // default
+      },
+      markdown: {
+        renderer: {
+          code: function (code, lang) {
+            if (lang === "mermaid") {
+              return (
+                '<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
+              );
             }
+            return this.origin.code.apply(this, arguments);
+          }
         }
+      },
+      vueComponents: {
+        'progress-bar': {
+          template: `
+          <div class="box">
+            <div class="progress">
+              <div class="bar" ref="bar" :style="width"></div>
+              <slot>
+                <img src="/static/img/progress_bar_button.png" alt="" :style="left">
+              </slot>
+            </div>
+            <div class="title">{{ title }}的进度：{{ recent }}/{{ total }}</div>
+          </div>`,
+          props: {
+            title: {default: undefined},
+            total: {default: undefined},
+            recent: {default: undefined},
+            colors: {default: undefined},
+          },
+          setup(props){
+            // const props = defineProps(['title', 'total', 'recent', 'colors']);
+            const scale = (props.recent / props.total * 100).toFixed(2) + '%';
+            const color = props.colors || ['#c0c5f3', '#9379e2', '#4b3a97'];
+            const width = {width: scale};
+            const left = {left: 'calc(' + scale + ' - 24px)'}
+            return {
+              color,
+              width,
+              left,
+            }
+          },
+          mounted(){
+            this.$refs.bar.style.backgroundImage = `linear-gradient(${this.color.join(', ')})`
+          }
+        }
+      }
     }
   </script>
   <!-- Docsify v4 -->
@@ -74,4 +113,5 @@
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
 </body>
+
 </html>

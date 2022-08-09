@@ -1,0 +1,29 @@
+.box {
+    width: 600px;
+}
+
+.progress {
+    position: relative;
+    height: 24px;
+    width: 100%;
+    border-radius: 12px;
+    background-color: #eee;
+    border: #ddd solid 2px;
+}
+
+.bar {
+    height: 100%;
+    border-radius: inherit;
+}
+
+img {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    top: -16px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 8px;
+}
