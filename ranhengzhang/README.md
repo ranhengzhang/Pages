@@ -3,7 +3,7 @@
 > 正文
 
 <progress-bar title="学习Vue" :total="168" :recent="168"></progress-bar>
-<progress-bar title="学习JavaScript高级" :total="48" :recent="36"></progress-bar>
+<progress-bar title="学习JavaScript高级" :total="48" :recent="48"></progress-bar>
 <progress-bar title="学习AJAX" :total="30" :recent="0"></progress-bar>
 <progress-bar title="学习ES6" :total="68" :recent="0"></progress-bar>
 <progress-bar title="学习NodeJS" :total="20" :recent="0"></progress-bar>
