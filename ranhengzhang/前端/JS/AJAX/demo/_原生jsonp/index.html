@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生jsonp</title>
+</head>
+<body>
+<label for="username">用户名：</label><input type="text" id="username">
+<p></p>
+<script>
+    const input = document.querySelector('input');
+    const p = document.querySelector('p');
+    function handle(data) {
+        input.style.border = "#f00 1px solid";
+        p.innerHTML = data.msg;
+    }
+    input.onblur = function (event) {
+        let username = this.value;
+        const script = document.createElement('script');
+        script.src = 'http://localhost:8000/server';
+        document.body.appendChild(script);
+    }
+</script>
+</body>
+</html>
